@@ -1,46 +1,41 @@
-Name:		texlive-platex
-Version:	64072
-Release:	2
+%global tl_name platex
+%global tl_revision 77830
+
+Name:		texlive-%{tl_name}
+Version:	%{tl_revision}
+Release:	1
 Summary:	pLaTeX2e and miscellaneous macros for pTeX
 Group:		Publishing
-URL:		https://www.ctan.org/tex-archive/macros/latex/contrib/platex
+URL:		https://www.ctan.org/tex-archive/macros/jptex/latex/platex
 License:	bsd3
-Source0:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/platex.r%{version}.tar.xz
-Source1:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/platex.doc.r%{version}.tar.xz
-Source2:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/platex.source.r%{version}.tar.xz
+Source0:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/platex.r%{tl_revision}.tar.xz
+Source1:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/platex.doc.r%{tl_revision}.tar.xz
+Source2:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/platex.source.r%{tl_revision}.tar.xz
 BuildArch:	noarch
-BuildRequires:	texlive-tlpkg
-Requires(pre):	texlive-tlpkg
-Requires(post):	texlive-kpathsea
+BuildSystem:	texlive
+Requires:	texlive(babel)
+Requires:	texlive(cm)
+Requires:	texlive(firstaid)
+Requires:	texlive(hyphen-base)
+Requires:	texlive(knuth-lib)
+Requires:	texlive(l3backend)
+Requires:	texlive(l3backend-dev)
+Requires:	texlive(l3kernel)
+Requires:	texlive(l3kernel-dev)
+Requires:	texlive(latex)
+Requires:	texlive(latex-base-dev)
+Requires:	texlive(latex-firstaid-dev)
+Requires:	texlive(latex-fonts)
+Requires:	texlive(platex.bin)
+Requires:	texlive(ptex)
+Requires:	texlive(ptex-fonts)
+Requires:	texlive(tex-ini-files)
+Requires:	texlive(unicode-data)
+Requires:	texlive(uptex)
+Provides:	texlive(%{tl_name}) = %{tl_revision}
 
 %description
-The bundle provides pLaTeX2e and miscellaneous macros for pTeX
-and e-pTeX. This is a community edition forked from the
-original ASCII edition (ptex-texmf-2.5).
+The bundle provides pLaTeX2e and miscellaneous macros for pTeX and
+e-pTeX. This is a community edition forked from the original ASCII
+edition (ptex-texmf-2.5).
 
-%prep
-%setup -c -a1 -a2
-%autopatch -p1
-
-%build
-
-%install
-rm -rf tlpkg
-mkdir -p %{buildroot}%{_datadir}
-cp -a texmf-dist %{buildroot}%{_datadir}
-
-%files
-%doc %{_texmfdistdir}/texmf-dist/source/platex
-%{_texmfdistdir}/texmf-dist/tex/platex
-%doc %{_texmfdistdir}/texmf-dist/doc/platex
-%{_texmfdistdir}/texmf-dist
-%{_texmfdistdir}/texmf-dist/doc
-%doc %{_texmfdistdir}/texmf-dist/doc/man
-%doc %{_texmfdistdir}/texmf-dist/doc/man/man1
-%doc %{_texmfdistdir}/texmf-dist/doc/man/man1/platex.man1.pdf
-%doc %{_texmfdistdir}/texmf-dist/doc/man/man1/platex.1
-
-%post -p %{_sbindir}/texlive.post
-
-%postun
-[ "$1" -eq 0 ] && %{_sbindir}/texlive.post
