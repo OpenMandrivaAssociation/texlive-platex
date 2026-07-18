@@ -1,5 +1,6 @@
 %global tl_name platex
 %global tl_revision 77830
+%global tl_bin_links platex:euptex platex-dev:euptex
 
 Name:		texlive-%{tl_name}
 Version:	%{tl_revision}
@@ -33,6 +34,8 @@ Requires:	texlive(tex-ini-files)
 Requires:	texlive(unicode-data)
 Requires:	texlive(uptex)
 Provides:	texlive(%{tl_name}) = %{tl_revision}
+Provides:	texlive(%{tl_name}.bin) = %{tl_revision}
+Provides:	texlive-%{tl_name}.bin = %{EVRD}
 
 %description
 The bundle provides pLaTeX2e and miscellaneous macros for pTeX and
